@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     "IBGE",
     "inventario",
     "manutencao",
-    "rede",
     "regulatorios",
 ]
 

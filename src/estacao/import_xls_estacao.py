@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-import rede.models as models  # Update this to the correct model path
+from .models import Estacao
 from django.db import IntegrityError
 
 class Command(BaseCommand):
@@ -59,7 +59,7 @@ class Command(BaseCommand):
 
                 # Manually create and save the Estacao object
                 try:
-                    estacao = models.Estacao(
+                    estacao = Estacao(
                         cidade=cidade,
                         uf=uf,
                         canal_virtual=canal_virtual,

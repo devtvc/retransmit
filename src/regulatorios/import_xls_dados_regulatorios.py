@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-import rede.models as models
+from .models import Dados_Regulatorios
 from django.db import IntegrityError
 
 class Command(BaseCommand):
@@ -61,7 +61,7 @@ class Command(BaseCommand):
 
                 # Manually create and save the Dados_Regulatorios object
                 try:
-                    dados_regulatorios = models.Dados_Regulatorios(
+                    dados_regulatorios = Dados_Regulatorios(
                         status_anatel=status_anatel,
                         numero_fistel=numero_fistel,
                         carater=carater,

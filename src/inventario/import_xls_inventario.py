@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-import rede.models as models
+from .models import Inventario
 from django.db import IntegrityError
 
 
@@ -40,7 +40,7 @@ class Command(BaseCommand):
 
                 # Manually create and save the Inventario object
                 try:
-                    inventario = models.Inventario(
+                    inventario = Inventario(
                         cidade=cidade,
                         equipe=equipe,
                         descricao=descricao,

@@ -18,14 +18,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import home_page
-from rede.views import image_view, pdf_view,station_view
+from estacao.views import image_view, pdf_view, estacao_page
 
 urlpatterns = [
     path('', home_page, name='home'),
     path('admin/', admin.site.urls),
     path('images/', image_view, name='image_view'),
     path('pdfs/', pdf_view, name='pdf_view'),
-    path('estacoes/', station_view, name='estacoes' )
+    path('estacoes/', estacao_page, name='estacoes' )
 ]
 
 if settings.DEBUG:
