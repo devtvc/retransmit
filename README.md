@@ -15,14 +15,14 @@ Feito com Django 5.1.4 e Python 3.10.12.
 - Melhoria do frontend (Adição de gráficos etc)
 
 ### Tutorial de instalação
-Abaixo uma lista de comandos para clonar e configurar este projeto na sua 
+Abaixo uma lista de comandos para clonar e rodar este projeto na sua 
 máquina local:
 
 - Instalar git e depois:
 
 ```
 git clone https://github.com/devtvc/gerenciarederf.git
-cd gerenciarederf
+cd gerenciarederf/src
 pip install -r requirements.txt
 python3 manage.py runserver
 ```
