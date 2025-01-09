@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <h2>{{ title }}</h2>
+        <p>{{ content}}</p>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <canvas id="total_estacoes" width="250" height="200"></canvas>
+            </div>
+
+        </div>
+    </div>
+
+    <script id="estacoes-data" type="application/json">
+        {{ estacoes|safe }}
+    </script>
+    <script id="valores-data" type="application/json">
+        {{ valores|safe }}
+    </script>
+
+{% endblock %}
