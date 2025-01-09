@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block base_head %}
+    <link rel="stylesheet" href='{% static "css/main.css" %}'>
+
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div class="container mt-5">
+        <h2 class="text-center">Sistema de Gerência da Rede do Interior</h2>
+        <p class="text-center">Número de Estações TV Cultura: <strong>{{ station_count }}</strong></p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <canvas id="total_estacoes" width="250" height="200"></canvas>
+            </div>
+
+        </div>
+    </div>
+
+    <script id="estacoes-data" type="application/json">
+        {{ estacoes|safe }}
+    </script>
+    <script id="valores-data" type="application/json">
+        {{ valores|safe }}
+    </script>
+    <!-- <p>Número de Estações TV Cultura: {{ station_count }}</p> -->
+
+{% endblock %}
