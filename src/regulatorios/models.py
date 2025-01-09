@@ -68,6 +68,7 @@ class Dados_Regulatorios(models.Model):
     erp = models.CharField(max_length=100)
     hci = models.CharField(max_length=100)
     fase = models.CharField(max_length=100)
+    anexo_mancha_de_cobertura = models.ImageField(upload_to='images/', blank=True, null=True)
     anexo_licenca = models.FileField(upload_to='pdfs/', blank=True, null=True)
     comentarios = models.TextField()
 

@@ -16,7 +16,7 @@ class Relatorio_Manutencao(models.Model):
     #     blank=True,
     #     null=True,
     # )
-
+    id = models.AutoField(primary_key=True)
     cidade = models.CharField(max_length=100)
 
     # def get_uf_choices():
