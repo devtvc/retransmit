@@ -18,16 +18,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for relatorio in relatorios %}
+                {% for manutencao in manutencoes %}
                 <tr>
-                    <td>{{ relatorio.data_manutencao }}</td>
-                    <td>{{ relatorio.cidade}}</td>
+                    <td>{{ manutencao.data_manutencao|date:"d/m/Y" }}</td>
+                    <td>{{ manutencao.cidade}}</td>
                     <td>
                         <button
                                 class="btn btn-info btn-sm"
-                                data-bs-toggle="model"
-                                data-bs-target="#relatorioModal"
-                                onclick="loadRelatorio( relatorio.id )">
+                                data-bs-toggle="modal"
+                                data-bs-target="#manutencaoModal"
+                                onclick="loadManutencao('{{manutencao.id}}')">
                                 Ver Detalhes
                         </button>
                     </td>
@@ -38,30 +38,30 @@
 
         <nav>
             <ul class="pagination">
-                {% if relatorios.has_previous %}
+                {% if manutencoes.has_previous %}
                     <li class="page-item"><a class="page-link" href="?page=1">Primeira</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ relatorios.previous_page_number }}">Anterior</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ manutencoes.previous_page_number }}">Anterior</a></li>
                 {% endif %}
 
-                {% for num in relatorios.paginator.page_range %}
-                    <li class="page-item {% if relatorios.number == num %}active{% endif %}">
+                {% for num in manutencoes.paginator.page_range %}
+                    <li class="page-item {% if manutencoes.number == num %}active{% endif %}">
                         <a class="page-link" href="?page={{ num }}">{{ num }}</a>
                     </li>
                 {% endfor %}
 
-                {% if relatorios.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ relatorios.next_page_number }}">Próxima</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ relatorios.paginator.num_pages }}">Última</a></li>
+                {% if manutencoes.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ manutencoes.next_page_number }}">Próxima</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ manutencoes.paginator.num_pages }}">Última</a></li>
                 {% endif %}
             </ul>
         </nav>
     </div>
 
-    <div class="modal fade" id="relatorioModal" tabindex="-1" aria-labelledby="relatorioModalLabel" aria-hidden="true">
+    <div class="modal fade" id="manutencaoModal" tabindex="-1" aria-labelledby="manutencaoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="relatorioModalLabel">Detalhes do Relatório</h5>
+                    <h5 class="modal-title" id="manutencaoModalLabel">Detalhes da Manutenção</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modalContent">
@@ -72,8 +72,8 @@
     </div>
 
     <script>
-        function loadRelatorio(id){
-            fetch(`/relatorio/${id}/`)
+        function loadManutencao(id){
+            fetch(`/manutencao/${id}/`)
                 .then(response => response.json())
                 .then(data => {
                     const modalContent = document.getElementById('modalContent');
@@ -82,6 +82,7 @@
                     <p><strong>Local:</strong> ${data.cidade}</p>
                     <p><strong>Descrição:</strong> ${data.comentario_manutencao}</p>
                     `;
+
                 });
         }
     </script>

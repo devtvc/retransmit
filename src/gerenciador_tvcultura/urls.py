@@ -19,14 +19,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import home_page
 from estacao.views import image_view, pdf_view, estacao_page
-from manutencao.views import ManutencaoListView, relatorio_detail
+from manutencao.views import ManutencaoListView, manutencao_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page, name='home'),
     path('estacoes/', estacao_page, name='estacoes'),
     path('manutencao/', ManutencaoListView.as_view(), name='manutencao'),
-    path('relatorio/<int:id>/', relatorio_detail, name='relatorio_detail'),
+    path('manutencao/<int:id>/', manutencao_detail, name='manutencao_detail'),
     path('images/', image_view, name='image_view'),
     path('pdfs/', pdf_view, name='pdf_view'),
 
