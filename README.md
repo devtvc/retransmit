@@ -18,3 +18,4 @@ git clone https://github.com/devtvc/gerenciarederf.git
 cd gerenciarederf
 pip install -r requirements.txt
 python3 manage.py runserver
+```
