@@ -39,19 +39,29 @@ class Relatorio_Manutencao(models.Model):
 
     data_reclamacao = models.DateTimeField(null=True, blank=True)
     data_manutencao = models.DateTimeField(null=True, blank=True)
-    autor_manutencao = models.CharField(max_length=100, blank=True)
+    TECNICO_MANUT = [
+        ('item1', 'ARI LIMA'),
+        ('item2', 'RODRIGO AGUADO'),
+        ('item3', 'PEDRO'),
+        ('item4', 'TANIS'),
+        ('item5', 'ALEXANDRE COSME'),
+        ('item6', 'ELIAS'),
+    ]
+
+    tecnico_manutencao = models.CharField(max_length=50, choices=TECNICO_MANUT, default='item1')
     TIPO_MANUT = [
         ('item1', 'PREVENTIVA'),
         ('item2', 'CORRETIVA'),
         ('item3', 'EMERGENCIAL'),
     ]
+    
     tipo_manutencao = models.CharField(max_length=10, choices=TIPO_MANUT, default='item1')
     comentario_manutencao = models.TextField(blank=True)
-    pot_direta = models.FloatField(null=True, blank=True)
-    pot_refletida = models.FloatField(null=True, blank=True)
-    exciter_power = models.FloatField(null=True, blank=True)
-    nivel_CN = models.FloatField(null=True, blank=True)
-    nivel_recepcao = models.FloatField(null=True, blank=True)
+    pot_direta = models.FloatField(null=True, blank=True, help_text="Leitura da potência direta em W")
+    pot_refletida = models.FloatField(null=True, blank=True, help_text="Leitura da potência direta em W")
+    exciter_power = models.FloatField(null=True, blank=True, help_text="Leitura do nível de excitação em dBm")
+    nivel_CN = models.FloatField(null=True, blank=True, help_text="Leitura de C/N em dB")
+    nivel_recepcao = models.FloatField(null=True, blank=True, help_text="Leitura do nível de recepção em dBm")
     VISTA_FRONTAL_TX = models.ImageField(upload_to='manutencao/', blank=True, null=True)
     VISTA_TRASEIRA_TX = models.ImageField(upload_to='manutencao/', blank=True, null=True)
     ANTENA_DE_RECEPCAO = models.ImageField(upload_to='manutencao/', blank=True, null=True)

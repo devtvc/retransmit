@@ -32,13 +32,14 @@ class Estacao(models.Model):
     potencia_projeto = models.CharField(max_length=30, help_text="Potência de projeto em W")
     potencia_operacao = models.CharField(max_length=30, help_text="Potência de operação em W")
 
-    sfn = models.CharField(
-        max_length=100,
-        choices=get_cidade_choices,
-        blank=True,
-        null=True,
-        help_text="Selecione a cidade que faz SFN com essa estação",
-    )
+    # sfn = models.CharField(
+    #     max_length=100,
+    #     choices=get_cidade_choices,
+    #     blank=True,
+    #     null=True,
+    #     help_text="Selecione a cidade que faz SFN com essa estação",
+    # )
+    sfn = models.CharField(max_length=10, blank=True)
     sfn_id = models.CharField(max_length=10, blank=True, help_text="Deixe em branco se a estação não faz SFN")
 
     equipe = models.CharField(max_length=10, help_text="Equipe de manutenção responsável")
@@ -48,15 +49,23 @@ class Estacao(models.Model):
     proprietario_torre = models.CharField(max_length=100)
     proprietario_terreno = models.CharField(max_length=100)
 
-    RESPONSABILIDADE = [
-        ('item1', 'FPA'),
-        ('item2', 'PM'),
-        ('item3', 'PMSP'),
-    ]
-    energia_paga_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
-    agua_paga_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
-    aluguel_pago_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
-    iptu_pago_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
+    # RESPONSABILIDADE = [
+    #     ('item1', 'FPA'),
+    #     ('item2', 'PM'),
+    #     ('item3', 'PMSP'),
+    # ]
+
+    #energia_paga_por = models.CharField(max_length=100, choices=RESPONSABILIDADE)
+    energia_paga_por = models.CharField(max_length=100)
+
+    #agua_paga_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
+    agua_paga_por = models.CharField(max_length=100)
+
+    #aluguel_pago_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
+    aluguel_pago_por = models.CharField(max_length=100)
+
+    #iptu_pago_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
+    iptu_pago_por = models.CharField(max_length=100)
 
     tipo_abrigo = models.CharField(max_length=100, blank=True)
     endereco = models.CharField(max_length=500)

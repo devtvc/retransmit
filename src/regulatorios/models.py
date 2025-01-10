@@ -1,14 +1,37 @@
 from django.db import models
+from IBGE.models import Dados_IBGE
 
 # Create your models here.
 class Dados_Regulatorios(models.Model):
-    cidade = models.CharField(max_length=100)
+    def get_cidade_choices():
+         # Fetch choices dynamically from the Cidade model
+        unique_cidades = Dados_IBGE.objects.values_list('cidade', flat=True).distinct()
+        return [(cidade, cidade) for cidade in unique_cidades]
+    
+    cidade = models.CharField(
+        max_length=100,
+        choices=get_cidade_choices,
+        blank=True,
+        null=True,
+    )
+    #cidade = models.CharField(max_length=100)
+    def get_uf_choices():
+         # Fetch choices dynamically from the Cidade model
+        unique_ufs = Dados_IBGE.objects.values_list('uf', flat=True).distinct()
+        return [(uf, uf) for uf in unique_ufs]
+    
+    uf = models.CharField(
+        max_length=100,
+        choices=get_uf_choices,
+        blank=True,
+        null=True,
+    )
     #UFS = [
     #    ('item1', 'SP'),
     #    ('item2', 'DF'),
     #]
     #uf = models.CharField(max_length=10, choices=UFS, default='item1')
-    uf = models.CharField(max_length=10)
+
     canal_fisico = models.CharField(max_length=100)
     #STATUS = [
     #    ('item1', 'TV-C1 (Canal Outorgado - Aguardando Ato de RF)'),
@@ -20,15 +43,15 @@ class Dados_Regulatorios(models.Model):
     #    ('item7', 'FM-C4 (Canal Licenciado)'),
     #]
     #status_anatel = models.CharField(max_length=100, choices=STATUS, default='item1')
-    status_anatel = models.CharField(max_length=100)
-    validade = models.CharField(max_length=100)
+    status_anatel = models.CharField(max_length=100, help_text="C1 à C5")
+    validade = models.DateField(null=True, blank=True)
     numero_fistel = models.CharField(max_length=100)
     #CARATERS = [
     #    ('item1', 'P'),
     #    ('item2', 'S'),
     #]
     #carater = models.CharField(max_length=10, choices=CARATERS, default='item1')
-    carater = models.CharField(max_length=20)
+    carater = models.CharField(max_length=10, help_text="P,S")
     #FINALIDADES = [
     #    ('item1', 'COMERCIAL'),
     #    ('item2', 'EDUCATIVO'),
@@ -44,8 +67,8 @@ class Dados_Regulatorios(models.Model):
     #    ('item4', 'FM'),
     #]
     #servico = models.CharField(max_length=10, choices=SERVICOS, default='item1')
-    servico = models.CharField(max_length=100)
-    frequencia = models.CharField(max_length=100)
+    servico = models.CharField(max_length=100, help_text="RTVD, GTVD, AM, FM")
+    frequencia = models.CharField(max_length=100, help_text="Frequência do canal em MHz")
     #CLASSES = [
     #    ('item1', 'A'),
     #    ('item2', 'B'),
@@ -61,7 +84,7 @@ class Dados_Regulatorios(models.Model):
     #    ('item2', 'COMPLEMENTAR'),
     #]
     #categoria = models.CharField(max_length=10, choices=CATEGORIAS, default='item1')
-    categoria = models.CharField(max_length=100)
+    categoria = models.CharField(max_length=100, help_text="Complementar, principal")
     latitude = models.CharField(max_length=100)
     longitude = models.CharField(max_length=100)
     altitude = models.CharField(max_length=100)

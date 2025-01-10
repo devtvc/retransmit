@@ -14,7 +14,9 @@
                 <tr>
                     <th>Data</th>
                     <th>Local</th>
-                    <th>Ações</th>
+                    <th>Técnico</th>
+                    <th>Tipo de Manutenção</th>
+                    <th>Informações</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +24,8 @@
                 <tr>
                     <td>{{ manutencao.data_manutencao|date:"d/m/Y" }}</td>
                     <td>{{ manutencao.cidade}}</td>
+                    <td>{{ manutencao.get_tecnico_manutencao_display }}</td>
+                    <td>{{ manutencao.get_tipo_manutencao_display }}</td>
                     <td>
                         <button
                                 class="btn btn-info btn-sm"

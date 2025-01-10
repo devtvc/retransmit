@@ -74,8 +74,8 @@ class Dados_Pagamento(models.Model):
    
     class Meta:
         db_table = "rede_dados_pagamento"
-        verbose_name = "Dados Pagamento"  # Singular name
-        verbose_name_plural = "Dados Pagamento"  # Plural name
+        verbose_name = "Dados Pagamentos"  # Singular name
+        verbose_name_plural = "Dados Pagamentos"  # Plural name
 
     def __str__(self):
         

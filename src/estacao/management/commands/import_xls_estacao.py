@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-from .models import Estacao
+from ...models import Estacao
 from django.db import IntegrityError
 
 class Command(BaseCommand):
@@ -23,14 +23,18 @@ class Command(BaseCommand):
             potencia_projeto_column = df['potencia_projeto']
             potencia_operacao_column = df['potencia_operacao']
             sfn_column = df['sfn']
+            sfn_id_column = df['sfn_id']
             equipe_column = df['equipe']
-            operacao_column = df['operacao']
+            responsabilidade_operacao_column = df['responsabilidade_operacao']
             status_operacao_column = df['status_operacao']
+            status_telemetria_column = df['status_telemetria']
             proprietario_torre_column = df['proprietario_torre']
-            pgto_energia_column = df['pgto_energia']
-            pgto_aluguel_column = df['pgto_aluguel']
-            pgto_agua_column = df['pgto_agua']
+            energia_paga_por_column = df['energia_paga_por']
+            aluguel_pago_por_column = df['aluguel_pago_por']
+            agua_paga_por_column = df['agua_paga_por']
+            iptu_pago_por_column = df['iptu_pago_por']
             proprietario_terreno_column = df['proprietario_terreno']
+            tipo_abrigo_column = df['tipo_abrigo']
             endereco_column = df['endereco']
             comentarios_column = df['comentarios']
 
@@ -43,14 +47,18 @@ class Command(BaseCommand):
                 potencia_projeto = potencia_projeto_column[index] if pd.notna(potencia_projeto_column[index]) else ''
                 potencia_operacao = potencia_operacao_column[index] if pd.notna(potencia_operacao_column[index]) else ''
                 sfn = sfn_column[index] if pd.notna(sfn_column[index]) else ''
+                sfn_id = sfn_id_column[index] if pd.notna(sfn_id_column[index]) else ''
                 equipe = equipe_column[index] if pd.notna(equipe_column[index]) else ''
-                operacao = operacao_column[index] if pd.notna(operacao_column[index]) else ''
+                responsabilidade_operacao = responsabilidade_operacao_column[index] if pd.notna(responsabilidade_operacao_column[index]) else ''
                 status_operacao = status_operacao_column[index] if pd.notna(status_operacao_column[index]) else ''
                 proprietario_torre = proprietario_torre_column[index] if pd.notna(proprietario_torre_column[index]) else ''
-                pgto_energia = pgto_energia_column[index] if pd.notna(pgto_energia_column[index]) else ''
-                pgto_aluguel = pgto_aluguel_column[index] if pd.notna(pgto_aluguel_column[index]) else ''
-                pgto_agua = pgto_agua_column[index] if pd.notna(pgto_agua_column[index]) else ''
+                status_telemetria = status_telemetria_column[index] if pd.notna(status_telemetria_column[index]) else ''
+                energia_paga_por = energia_paga_por_column[index] if pd.notna(energia_paga_por_column[index]) else ''
+                aluguel_pago_por = aluguel_pago_por_column[index] if pd.notna(aluguel_pago_por_column[index]) else ''
+                agua_paga_por = agua_paga_por_column[index] if pd.notna(agua_paga_por_column[index]) else ''
+                iptu_pago_por = iptu_pago_por_column[index] if pd.notna(iptu_pago_por_column[index]) else ''
                 proprietario_terreno = proprietario_terreno_column[index] if pd.notna(proprietario_terreno_column[index]) else ''
+                tipo_abrigo = tipo_abrigo_column[index] if pd.notna(tipo_abrigo_column[index]) else ''
                 endereco = endereco_column[index] if pd.notna(endereco_column[index]) else ''
                 comentarios = comentarios_column[index] if pd.notna(comentarios_column[index]) else ''
 
@@ -66,14 +74,18 @@ class Command(BaseCommand):
                         potencia_projeto=potencia_projeto,
                         potencia_operacao=potencia_operacao,
                         sfn=sfn,
+                        sfn_id=sfn_id,
                         equipe=equipe,
-                        operacao=operacao,
+                        responsabilidade_operacao=responsabilidade_operacao,
                         status_operacao=status_operacao,
                         proprietario_torre=proprietario_torre,
-                        pgto_energia=pgto_energia,
-                        pgto_aluguel=pgto_aluguel,
-                        pgto_agua=pgto_agua,
+                        status_telemetria=status_telemetria,
+                        energia_paga_por=energia_paga_por,
+                        aluguel_pago_por=aluguel_pago_por,
+                        agua_paga_por=agua_paga_por,
+                        iptu_pago_por=iptu_pago_por,
                         proprietario_terreno=proprietario_terreno,
+                        tipo_abrigo=tipo_abrigo,
                         endereco=endereco,
                         comentarios=comentarios
                     )

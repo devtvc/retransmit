@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-from .models import Dados_Regulatorios
+from ...models import Dados_Regulatorios
 from django.db import IntegrityError
 
 class Command(BaseCommand):

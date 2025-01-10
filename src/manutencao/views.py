@@ -21,7 +21,7 @@ def manutencao_detail(request,id):
         'data_manutencao': manutencao.data_manutencao.strftime('%d/%m/%Y'),
         'cidade': manutencao.cidade,
         'uf': manutencao.uf,
-        'autor_manutencao': manutencao.autor_manutencao,
+        'autor_manutencao': manutencao.tecnico_manutencao,
         'tipo_manutencao': manutencao.tipo_manutencao,
         'comentario_manutencao': manutencao.comentario_manutencao,
         'pot_direta': manutencao.pot_direta,
