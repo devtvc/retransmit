@@ -1,6 +1,7 @@
 from django.db import models
 from IBGE.models import Dados_IBGE
 
+
 # Create your models here.
 class Estacao(models.Model):
     def get_cidade_choices():
@@ -30,14 +31,21 @@ class Estacao(models.Model):
     canal_virtual = models.CharField(max_length=30)
     potencia_projeto = models.CharField(max_length=30)
     potencia_operacao = models.CharField(max_length=30)
-    sfn = models.CharField(max_length=10)
+
+    sfn = models.CharField(
+        max_length=100,
+        choices=get_cidade_choices,
+        blank=True,
+        null=True,
+        help_text="Selecione a cidade que faz SFN com essa estação",
+    )
+
+    #sfn = models.CharField(max_length=10)
     equipe = models.CharField(max_length=10)
     operacao = models.CharField(max_length=100)
     status_operacao = models.CharField(max_length=100)
+    status_telemetria = models.CharField(max_length=100)
     proprietario_torre = models.CharField(max_length=100)
-    pgto_energia = models.CharField(max_length=100)
-    pgto_aluguel = models.CharField(max_length=100)
-    pgto_agua = models.CharField(max_length=100)
     proprietario_terreno = models.CharField(max_length=100)
     tipo_abrigo = models.CharField(max_length=100, blank=True)
     endereco = models.CharField(max_length=500)

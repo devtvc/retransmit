@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "inventario",
     "manutencao",
     "regulatorios",
+    "pagamentos",
 ]
 
 # Default primary key field type

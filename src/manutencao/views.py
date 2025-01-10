@@ -17,8 +17,18 @@ class ManutencaoListView(ListView):
 def manutencao_detail(request,id):
     manutencao = Relatorio_Manutencao.objects.get(id=id)
     data = {
+        'data_reclamacao': manutencao.data_reclamacao.strftime('%d/%m/%Y'),
         'data_manutencao': manutencao.data_manutencao.strftime('%d/%m/%Y'),
         'cidade': manutencao.cidade,
+        'uf': manutencao.uf,
+        'autor_manutencao': manutencao.autor_manutencao,
+        'tipo_manutencao': manutencao.tipo_manutencao,
         'comentario_manutencao': manutencao.comentario_manutencao,
+        'pot_direta': manutencao.pot_direta,
+        'pot_refletida': manutencao.pot_refletida,
+        'exciter_power': manutencao.exciter_power,
+        'nivel_CN': manutencao.nivel_CN,
+        'nivel_recepcao': manutencao.nivel_recepcao,
+        # 'VISAO_GERAL': manutencao.VISAO_GERAL.url,
     }
     return JsonResponse(data)

@@ -4,18 +4,18 @@ from IBGE.models import Dados_IBGE
 
 # Create your models here.
 class Inventario(models.Model):
-    def get_cidade_choices():
-         # Fetch choices dynamically from the Cidade model
-        unique_cidades = Dados_IBGE.objects.values_list('cidade', flat=True).distinct()
-        return [(cidade, cidade) for cidade in unique_cidades]
+    # def get_cidade_choices():
+    #      # Fetch choices dynamically from the Cidade model
+    #     unique_cidades = Dados_IBGE.objects.values_list('cidade', flat=True).distinct()
+    #     return [(cidade, cidade) for cidade in unique_cidades]
     
-    cidade = models.CharField(
-        max_length=100,
-        choices=get_cidade_choices,
-        blank=True,
-        null=True,
-    )
-    #cidade = models.CharField(max_length=100)
+    # cidade = models.CharField(
+    #     max_length=100,
+    #     choices=get_cidade_choices,
+    #     blank=True,
+    #     null=True,
+    # )
+    cidade = models.CharField(max_length=100)
     #EQUIPES = [
     #    ('item1', 'SP-1'),
     #    ('item2', 'SP-2'),
