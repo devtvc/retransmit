@@ -29,8 +29,8 @@ class Estacao(models.Model):
     )
     #uf = models.CharField(max_length=10)
     canal_virtual = models.CharField(max_length=30)
-    potencia_projeto = models.CharField(max_length=30)
-    potencia_operacao = models.CharField(max_length=30)
+    potencia_projeto = models.CharField(max_length=30, help_text="Potência de projeto em W")
+    potencia_operacao = models.CharField(max_length=30, help_text="Potência de operação em W")
 
     sfn = models.CharField(
         max_length=100,
@@ -39,22 +39,29 @@ class Estacao(models.Model):
         null=True,
         help_text="Selecione a cidade que faz SFN com essa estação",
     )
+    sfn_id = models.CharField(max_length=10, blank=True, help_text="Deixe em branco se a estação não faz SFN")
 
-    #sfn = models.CharField(max_length=10)
-    equipe = models.CharField(max_length=10)
-    operacao = models.CharField(max_length=100)
+    equipe = models.CharField(max_length=10, help_text="Equipe de manutenção responsável")
+    responsabilidade_operacao = models.CharField(max_length=100, help_text="Empresa responsável pela operação e manutenção da estação")
     status_operacao = models.CharField(max_length=100)
     status_telemetria = models.CharField(max_length=100)
     proprietario_torre = models.CharField(max_length=100)
     proprietario_terreno = models.CharField(max_length=100)
+
+    RESPONSABILIDADE = [
+        ('item1', 'FPA'),
+        ('item2', 'PM'),
+        ('item3', 'PMSP'),
+    ]
+    energia_paga_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
+    agua_paga_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
+    aluguel_pago_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
+    iptu_pago_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
+
     tipo_abrigo = models.CharField(max_length=100, blank=True)
     endereco = models.CharField(max_length=500)
-    comentarios = models.TextField()
-    #RESPONSABILIDADE = [
-    #    ('item1', 'FPA'),
-    #   ('item2', 'PM'),
-    #    ('item3', 'PMSP'),
-    #]
+    comentarios = models.TextField(blank=True, help_text="Insira outras informações relevantes sobre a estação")
+    
     #proprietario_terreno = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
     #proprietario_torre = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
     #pgto_energia = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')

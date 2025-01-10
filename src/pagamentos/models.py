@@ -66,7 +66,6 @@ class Dados_Pagamento(models.Model):
         blank=True,  
         null=True, 
     )
-    conta_paga_por = models.CharField(max_length=10, choices=PAGO_POR, default='item1')
     conta_paga_a = models.CharField(max_length=100, help_text="Digite o CNPJ ou CPF")
     razao_social_receptor = models.CharField(max_length=100, default="", help_text="Digite a razão social do CPF/CNPJ informado acima")
     valor_bruto_conta = models.FloatField(null=True, blank=True, help_text="Digite o valor bruto da conta em R$")
