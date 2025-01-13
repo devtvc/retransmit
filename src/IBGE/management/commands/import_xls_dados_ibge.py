@@ -26,6 +26,7 @@ class Command(BaseCommand):
             densidade_demografica_column = df['densidade_demografica']
             escolarizacao_column = df['escolarizacao']
             cobertura_feita_por_column = df['cobertura_feita_por']
+            cobertura_tvc_column = df['cobertura_tvc']
 
             # Loop through each row (row-by-row) and manually insert into the database
             for index in range(len(df)):
@@ -39,6 +40,7 @@ class Command(BaseCommand):
                 densidade_demografica = densidade_demografica_column[index] if pd.notna(densidade_demografica_column[index]) else None
                 escolarizacao = escolarizacao_column[index] if pd.notna(escolarizacao_column[index]) else None
                 cobertura_feita_por = cobertura_feita_por_column[index] if pd.notna(cobertura_feita_por_column[index]) else ''
+                cobertura_tvc = cobertura_tvc_column[index] if pd.notna(cobertura_tvc_column[index]) else ''
 
                 # Debugging: Log the data being processed
                 self.stdout.write(self.style.SUCCESS(f'Importing: {cidade} - UF: {uf}'))
@@ -55,6 +57,7 @@ class Command(BaseCommand):
                         densidade_demografica=densidade_demografica,
                         escolarizacao=escolarizacao,
                         cobertura_feita_por=cobertura_feita_por,
+                        cobertura_tvc=cobertura_tvc,
                     )
                     dados_ibge.save()
                     self.stdout.write(self.style.SUCCESS(f'Successfully imported {cidade}'))

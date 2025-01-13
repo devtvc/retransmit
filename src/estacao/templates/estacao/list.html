@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1>Lista de Estações</h1>
+
+        <!-- <div class="mb-3">
+            <a href="?orderby=cidade" class="btn btn-primary">Ordenar por Cidade</a>
+        </div> -->
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Cidade</th>
+                    <th>Operação</th>
+                    <th>Informações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for estacao in estacoes %}
+                <tr>
+                    <td>{{ estacao.cidade}}</td>
+                    <td>{{ estacao.responsabilidade_operacao }}</td>
+                    <td>
+                        <button
+                                class="btn btn-info btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#estacaoModal"
+                                onclick="loadEstacao('{{estacao.id}}')">
+                                Ver Detalhes
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <nav>
+            <ul class="pagination">
+                {% if estacoes.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">Primeira</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ estacoes.previous_page_number }}">Anterior</a></li>
+                {% endif %}
+
+                {% for num in estacoes.paginator.page_range %}
+                    <li class="page-item {% if estacoes.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if estacoes.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ estacoes.next_page_number }}">Próxima</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ estacoes.paginator.num_pages }}">Última</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+    <div class="modal fade" id="estacaoModal" tabindex="-1" aria-labelledby="estacaoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="estacaoModalLabel">Detalhes da Estacão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalContent">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadEstacao(id){
+            fetch(`/lista_estacoes/${id}/`)
+                .then(response => response.json())
+                .then(data => {
+                    const modalContent = document.getElementById('modalContent');
+                    modalContent.innerHTML = `
+                    <p><strong>Cidade:</strong> ${data.cidade} <strong>Operação:</strong> ${data.responsabilidade_operacao}</p>
+                    <p><strong>Canal virtual:</strong> ${data.canal_virtual}</p>
+                    <p><strong>Potência de projeto:</strong> ${data.potencia_projeto} W</p>
+                    <p><strong>Potência de operação:</strong> ${data.potencia_operacao} W</p>
+                    <p><strong>Disponibilidade últimos 30 dias:</strong> ${data.disponibilidade}%</p>
+
+                    `;
+                });
+        }
+    </script>
+{% endblock %}
+<!-- <p><strong>Visão Geral:</strong></p>
+<img src="${data.VISAO_GERAL}" alt="Visão Geral" style="max-width: 100%;"> -->
+

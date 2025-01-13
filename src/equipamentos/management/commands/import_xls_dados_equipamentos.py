@@ -24,7 +24,6 @@ class Command(BaseCommand):
             fabricante_antena_tx_column = df['fabricante_antena_tx']
             modelo_antena_tx_column = df['modelo_antena_tx']
             modelo_rx_column = df['modelo_rx']
-            nivel_recepcao_column = df['nivel_recepcao']
             fabricante_antena_rx_column = df['fabricante_antena_rx']
             diametro_antena_rx_column = df['diametro_antena_rx']
             tipo_torre_column = df['tipo_torre']
@@ -42,7 +41,6 @@ class Command(BaseCommand):
                 fabricante_antena_tx = fabricante_antena_tx_column[index] if pd.notna(fabricante_antena_tx_column[index]) else ''
                 modelo_antena_tx = modelo_antena_tx_column[index] if pd.notna(modelo_antena_tx_column[index]) else ''
                 modelo_rx = modelo_rx_column[index] if pd.notna(modelo_rx_column[index]) else ''
-                nivel_recepcao = nivel_recepcao_column[index] if pd.notna(nivel_recepcao_column[index]) else ''
                 fabricante_antena_rx = fabricante_antena_rx_column[index] if pd.notna(fabricante_antena_rx_column[index]) else ''
                 diametro_antena_rx = diametro_antena_rx_column[index] if pd.notna(diametro_antena_rx_column[index]) else None
                 tipo_torre = tipo_torre_column[index] if pd.notna(tipo_torre_column[index]) else ''
@@ -63,7 +61,6 @@ class Command(BaseCommand):
                         fabricante_antena_tx=fabricante_antena_tx,
                         modelo_antena_tx=modelo_antena_tx,
                         modelo_rx=modelo_rx,
-                        nivel_recepcao=nivel_recepcao,
                         fabricante_antena_rx=fabricante_antena_rx,
                         diametro_antena_rx=diametro_antena_rx,
                         tipo_torre=tipo_torre,

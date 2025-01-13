@@ -1,7 +1,17 @@
 from django.contrib import admin
 from .models import Estacao
 
+
 # Register your models here.
 
-admin.site.register(Estacao)
+class EstacaoAdmin(admin.ModelAdmin):
+    list_display = ('cidade', 'responsabilidade_operacao')  # Columns to display in the admin list
+    list_filter = ('uf', 'responsabilidade_operacao', 'status_operacao', 'sfn', 'energia_paga_por', 'agua_paga_por', 'aluguel_pago_por', 'iptu_pago_por')  # Fields for filtering
+    search_fields = ('cidade', 'responsabilidade_operacao')  # Fields to include in the search
+
+    # def disponibilidade_display(self, obj):
+    #     return obj.disponibilidade_30_dias
+    # disponibilidade_display.short_description = "Disponibilidade"
+
+admin.site.register(Estacao, EstacaoAdmin)
 

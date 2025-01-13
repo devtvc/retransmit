@@ -3,34 +3,35 @@ from IBGE.models import Dados_IBGE
 
 # Create your models here.
 class Dados_Regulatorios(models.Model):
-    def get_cidade_choices():
-         # Fetch choices dynamically from the Cidade model
-        unique_cidades = Dados_IBGE.objects.values_list('cidade', flat=True).distinct()
-        return [(cidade, cidade) for cidade in unique_cidades]
+    # def get_cidade_choices():
+    #      # Fetch choices dynamically from the Cidade model
+    #     unique_cidades = Dados_IBGE.objects.values_list('cidade', flat=True).distinct()
+    #     return [(cidade, cidade) for cidade in unique_cidades]
     
-    cidade = models.CharField(
-        max_length=100,
-        choices=get_cidade_choices,
-        blank=True,
-        null=True,
-    )
-    #cidade = models.CharField(max_length=100)
-    def get_uf_choices():
-         # Fetch choices dynamically from the Cidade model
-        unique_ufs = Dados_IBGE.objects.values_list('uf', flat=True).distinct()
-        return [(uf, uf) for uf in unique_ufs]
+    # cidade = models.CharField(
+    #     max_length=100,
+    #     choices=get_cidade_choices,
+    #     blank=True,
+    #     null=True,
+    # )
+    cidade = models.CharField(max_length=100)
+    # def get_uf_choices():
+    #      # Fetch choices dynamically from the Cidade model
+    #     unique_ufs = Dados_IBGE.objects.values_list('uf', flat=True).distinct()
+    #     return [(uf, uf) for uf in unique_ufs]
     
-    uf = models.CharField(
-        max_length=100,
-        choices=get_uf_choices,
-        blank=True,
-        null=True,
-    )
+    # uf = models.CharField(
+    #     max_length=100,
+    #     choices=get_uf_choices,
+    #     blank=True,
+    #     null=True,
+    # )
     #UFS = [
     #    ('item1', 'SP'),
     #    ('item2', 'DF'),
     #]
     #uf = models.CharField(max_length=10, choices=UFS, default='item1')
+    uf = models.CharField(max_length=10)
 
     canal_fisico = models.CharField(max_length=100)
     #STATUS = [

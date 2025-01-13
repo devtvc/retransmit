@@ -21,14 +21,15 @@ def manutencao_detail(request,id):
         'data_manutencao': manutencao.data_manutencao.strftime('%d/%m/%Y'),
         'cidade': manutencao.cidade,
         'uf': manutencao.uf,
-        'autor_manutencao': manutencao.tecnico_manutencao,
-        'tipo_manutencao': manutencao.tipo_manutencao,
+        'tecnico_manutencao': manutencao.get_tecnico_manutencao_display(),
+        'tipo_manutencao': manutencao.get_tipo_manutencao_display(),
         'comentario_manutencao': manutencao.comentario_manutencao,
         'pot_direta': manutencao.pot_direta,
         'pot_refletida': manutencao.pot_refletida,
         'exciter_power': manutencao.exciter_power,
         'nivel_CN': manutencao.nivel_CN,
         'nivel_recepcao': manutencao.nivel_recepcao,
+        'disponibilidade': manutencao.disponibilidade,
         # 'VISAO_GERAL': manutencao.VISAO_GERAL.url,
     }
     return JsonResponse(data)

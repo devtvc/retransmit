@@ -1,6 +1,8 @@
 from django.db import models
-from estacao.models import Estacao
 from django.utils import timezone
+from django.db.models import Count
+from datetime import timedelta
+
 
 # Create your models here.
 class Relatorio_Manutencao(models.Model):
@@ -39,6 +41,25 @@ class Relatorio_Manutencao(models.Model):
 
     data_reclamacao = models.DateTimeField(null=True, blank=True)
     data_manutencao = models.DateTimeField(null=True, blank=True)
+    
+    disponibilidade = models.FloatField(null=True, blank=True, editable=False)
+
+    # @property
+    # def disponibilidade(self):
+    #     if self.data_reclamacao and self.data_manutencao:
+    #         difference = (self.data_manutencao - self.data_reclamacao).days
+    #         return 100 - ((difference / 30) * 100)
+    #     return None
+    
+    def save(self, *args, **kwargs):
+        if self.data_reclamacao and self.data_manutencao:
+            difference = (self.data_manutencao - self.data_reclamacao).days
+            self.disponibilidade = round(100 - ((difference / 30) * 100), 2)
+        else:
+            # Set disponibilidade to 100 if either date is missing
+            self.disponibilidade = 100.0
+        super().save(*args, **kwargs)
+
     TECNICO_MANUT = [
         ('item1', 'ARI LIMA'),
         ('item2', 'RODRIGO AGUADO'),
@@ -81,3 +102,6 @@ class Relatorio_Manutencao(models.Model):
     def __str__(self):
         data_manutencao_local = timezone.localtime(self.data_manutencao) if self.data_manutencao else None
         return f"{self.cidade} - {data_manutencao_local}"
+    
+    def my_annotation_function(queryset):
+        return queryset.annotate(city_count=Count('cidade'))

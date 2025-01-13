@@ -84,14 +84,14 @@
                     modalContent.innerHTML = `
                     <p><strong>Data Reclamação:</strong> ${data.data_reclamacao} <strong>Data Manutenção:</strong> ${data.data_manutencao}</p>
                     <p><strong>Cidade:</strong> ${data.cidade} <strong>UF:</strong> ${data.uf}</p>
-                    <p><strong>Autor Manutenção:</strong> ${data.autor_manutencao}</p>
+                    <p><strong>Técnico Manutenção:</strong> ${data.tecnico_manutencao}</p>
                     <p><strong>Tipo Manutenção:</strong> ${data.tipo_manutencao}</p>
-                    <p><strong>Comentário:</strong> ${data.comentario_manutencao}</p>
-                    <p><strong>Pot Direta:</strong> ${data.pot_direta}</p>
-                    <p><strong>Pot Refletida:</strong> ${data.pot_refletida}</p>
-                    <p><strong>Exciter Power:</strong> ${data.exciter_power}</p>
-                    <p><strong>Nível CN:</strong> ${data.nivel_CN}</p>
-                    <p><strong>Nível Recepção Power:</strong> ${data.nivel_recepcao}</p>
+                    <p><strong>Pot Direta:</strong> ${data.pot_direta} W</p>
+                    <p><strong>Pot Refletida:</strong> ${data.pot_refletida} W</p>
+                    <p><strong>Exciter Power:</strong> ${data.exciter_power} dBm</p>
+                    <p><strong>Nível CN:</strong> ${data.nivel_CN} dB</p>
+                    <p><strong>Nível Recepção Power:</strong> ${data.nivel_recepcao} dBm</p>
+                    <p><strong>Comentários:</strong> ${data.comentario_manutencao}</p>
 
                     `;
                 });
@@ -100,3 +100,4 @@
 {% endblock %}
 <!-- <p><strong>Visão Geral:</strong></p>
 <img src="${data.VISAO_GERAL}" alt="Visão Geral" style="max-width: 100%;"> -->
+

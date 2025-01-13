@@ -11,6 +11,7 @@ class Dados_IBGE(models.Model):
     densidade_demografica = models.FloatField(blank=True, null=True)
     escolarizacao = models.FloatField(blank=True, null=True)
     cobertura_feita_por = models.CharField(max_length=100)
+    cobertura_tvc = models.CharField(max_length=100, default="")
    
     class Meta:
         db_table = "rede_dados_ibge"
