@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Estacao
-from .models import Relatorio_Manutencao
+from .models import Estacao, Relatorio_Manutencao
 import json
 from django.views.generic import ListView
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 # Create your views here.
 def estacao_page(request):
@@ -62,3 +62,30 @@ def estacao_detail(request,id):
         # 'VISAO_GERAL': estacao.VISAO_GERAL.url,
     }
     return JsonResponse(data)
+
+def disponibilidade_chart(request):
+    estacoes = Estacao.objects.all()
+
+    paginator = Paginator(estacoes, 10)  # Paginate results (25 stations per page)
+
+    page_number = request.GET.get('page')  # Get the page number from the GET request
+    page_obj = paginator.get_page(page_number)  # Get the corresponding page object
+
+    labels = []
+    data = []
+
+    for estacao in page_obj.object_list:
+        relatorio = Relatorio_Manutencao.objects.filter(cidade=estacao.cidade).first()
+        labels.append(estacao.cidade)
+        if relatorio:
+            data.append(relatorio.disponibilidade)  # Use 0 if disponibilidade is None
+        else:
+            data.append(100)
+
+    context = {
+        'labels': labels,  # Ensure this is a list of strings
+        'data': data,      # Ensure this is a list of numbers
+        'page_obj': page_obj
+    }
+    return render(request, 'estacao/chart.html', context)
+    

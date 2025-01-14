@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.db.models import Count
-from datetime import timedelta
+from django.utils.timezone import now
+from django.core.exceptions import ValidationError
 
 
 # Create your models here.
@@ -41,6 +42,38 @@ class Relatorio_Manutencao(models.Model):
 
     data_reclamacao = models.DateTimeField(null=True, blank=True)
     data_manutencao = models.DateTimeField(null=True, blank=True)
+
+    def clean(self):
+        super().clean()
+
+        current_time = now()
+
+        # Garante que os dois campos tem um valor
+        if self.data_reclamacao and self.data_manutencao:
+            # Garante que a data de manutenção seja maior que a data de reclamação
+            if self.data_manutencao <= self.data_reclamacao:
+                raise ValidationError({
+                    'data_manutencao': "A Data de Manutenção deve ser maior que a Data de Reclamação."
+                })
+
+            # Checa se a diferença entre as datas de reclamação e manutenção é menor que 30 dias
+            delta_days = (self.data_manutencao - self.data_reclamacao).days
+            if delta_days > 30:
+                raise ValidationError({
+                    'data_manutencao': "A diferença entre Data de Manutenção e Data de Reclamação não pode ser maior que 30 dias."
+                })
+
+            # Garante que as duas datas são menores que a data atual
+            if self.data_reclamacao > current_time:
+                raise ValidationError({
+                    'data_reclamacao': "A Data de Reclamação deve ser anterior à data atual."
+                })
+
+            if self.data_manutencao > current_time:
+                raise ValidationError({
+                    'data_manutencao': "A Data de Manutenção deve ser anterior à data atual."
+                })
+       
     
     disponibilidade = models.FloatField(null=True, blank=True, editable=False)
 

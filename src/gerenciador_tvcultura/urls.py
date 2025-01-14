@@ -17,9 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import home_page
-from .views import sobre_page
-from estacao.views import image_view, pdf_view, estacao_page, estacao_detail, EstacaoListView
+from .views import home_page, sobre_page
+from estacao.views import image_view, pdf_view, estacao_page, estacao_detail, EstacaoListView, disponibilidade_chart
 from manutencao.views import ManutencaoListView, manutencao_detail
 
 urlpatterns = [
@@ -28,6 +27,7 @@ urlpatterns = [
     path('estacoes/', estacao_page, name='estacoes'),
     path('lista_estacoes/', EstacaoListView.as_view(), name='lista_estacoes'),
     path('lista_estacoes/<int:id>/', estacao_detail, name='estacao_detail'),
+    path('disponibilidade/', disponibilidade_chart, name='disponibilidade'),
     path('manutencao/', ManutencaoListView.as_view(), name='manutencao'),
     path('manutencao/<int:id>/', manutencao_detail, name='manutencao_detail'),
     path('sobre/', sobre_page, name='sobre'),

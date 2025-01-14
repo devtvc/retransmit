@@ -1,6 +1,7 @@
 {% load static %}
 <!-- {% url 'home' as home_url %} -->
 {% url 'estacoes' as estacoes_url %}
+{% url 'disponibilidade' as disponibilidade_url %}
 {% url 'lista_estacoes' as lista_estacoes_url %}
 {% url 'manutencao' as manutencao_url %}
 {% url 'sobre' as sobre_url %}
@@ -23,6 +24,9 @@
                 </li>
                 <li class="nav-item {% if request.path == lista_estacoes_url %} active {% endif %}">
                     <a class="nav-link" href="{{ lista_estacoes_url }}">Lista Estações</a>
+                </li>
+                <li class="nav-item {% if request.path == disponibilidade %} active {% endif %}">
+                    <a class="nav-link" href="{{ disponibilidade_url }}">Disponibilidade</a>
                 </li>
                 <li class="nav-item {% if request.path == manutencao_url %} active {% endif %}">
                     <a class="nav-link" href="{{ manutencao_url }}">Manutenção</a>

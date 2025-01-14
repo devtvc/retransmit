@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disponibilidade x Estação</title>
+    <!-- Load the static tag -->
+    {% load static %}
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href='{% static "css/main.css" %}'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Disponibilidade dos últimos 30 dias por estação</h1>
+    <canvas id="disponibilidadeChart" width="300" height="150"></canvas>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Próximo</a>
+        {% endif %}
+    </div>
+
+    <script>
+        const labels = {{ labels|safe }};  // Ensure this is a valid JavaScript array
+        const data = {{ data|safe }};      // Ensure this is a valid JavaScript array
+
+        console.log("Labels:", labels);
+        console.log("Data:", data);
+
+        const ctx = document.getElementById('disponibilidadeChart').getContext('2d');
+        const disponibilidadeChart = new Chart(ctx, {
+            type: 'bar', // Bar chart
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Disponibilidade (%)',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100 // Set max to 100%
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
