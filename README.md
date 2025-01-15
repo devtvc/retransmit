@@ -8,7 +8,7 @@ Feito com Django 5.1.4 e Python 3.10.12.
   - Controle de dados regulatórios (Anatel);
   - Controle de informações gerais das estações;
   - Controle de pagamentos de contas das estações;
-  - Controle da instalação de sistema de telemetria;
+  - Controle da instalação do sistema de telemetria;
   - Controle de manutenções.
     
 - Via frontend
