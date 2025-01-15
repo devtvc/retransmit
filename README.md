@@ -12,11 +12,11 @@ Feito com Django 5.1.4 e Python 3.10.12.
   - Controle de manutenções.
     
 - Via frontend
-  - Visualização básica das informações das estações; TESTE
+  - Visualização básica das informações das estações;
   - Visualização da disponibilidade das estações.
  
 ### Melhorias futuras
-- Frontend (Mais informações sobre as estações)
+- Frontend (Mais informações sobre as estações).
 
 ### Tutorial de instalação
 Abaixo uma lista de comandos para clonar e rodar este projeto na sua 
@@ -25,7 +25,7 @@ máquina local:
 - Instalar git e depois:
 
 ```
-git clone https://github.com/devtvc/gerenciarederf.git
+git clone https://github.com/devtvc/retransmit.git
 cd gerenciarederf/src
 pip install -r requirements.txt
 python3 manage.py runserver localhost:8000
