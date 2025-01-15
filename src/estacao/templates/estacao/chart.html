@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,14 +29,10 @@
         {% endif %}
     </div>
 
-
     <script>
 
         const labels = {{ labels|safe }};
         const data = {{ data|safe }}; 
-
-        console.log("Labels:", labels); // Ensure labels is a valid array
-        console.log("Data:", data);   
         
         const ctx = document.getElementById('disponibilidadeChart').getContext('2d');
         const disponibilidadeChart = new Chart(ctx, {
@@ -61,4 +59,5 @@
     </script>
 </body>
 </html>
+{% endblock %}
 
