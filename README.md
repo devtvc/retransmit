@@ -28,5 +28,5 @@ máquina local:
 git clone https://github.com/devtvc/gerenciarederf.git
 cd gerenciarederf/src
 pip install -r requirements.txt
-python3 manage.py runserver
+python3 manage.py runserver localhost:8000
 ```
