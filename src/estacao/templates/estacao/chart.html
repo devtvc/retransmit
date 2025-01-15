@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Disponibilidade dos últimos 30 dias por estação</h1>
+    <h1>Disponibilidade média dos últimos 30 dias por estação</h1>
     <canvas id="disponibilidadeChart" width="300" height="150"></canvas>
 
     <!-- Pagination Controls -->
@@ -27,13 +27,15 @@
         {% endif %}
     </div>
 
+
     <script>
-        const labels = {{ labels|safe }};  // Ensure this is a valid JavaScript array
-        const data = {{ data|safe }};      // Ensure this is a valid JavaScript array
 
-        console.log("Labels:", labels);
-        console.log("Data:", data);
+        const labels = {{ labels|safe }};
+        const data = {{ data|safe }}; 
 
+        console.log("Labels:", labels); // Ensure labels is a valid array
+        console.log("Data:", data);   
+        
         const ctx = document.getElementById('disponibilidadeChart').getContext('2d');
         const disponibilidadeChart = new Chart(ctx, {
             type: 'bar', // Bar chart

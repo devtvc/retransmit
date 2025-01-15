@@ -73,12 +73,18 @@ def disponibilidade_chart(request):
 
     labels = []
     data = []
+    soma_disponibilidade = 0.0
 
     for estacao in page_obj.object_list:
-        relatorio = Relatorio_Manutencao.objects.filter(cidade=estacao.cidade).first()
+        relatorios = Relatorio_Manutencao.objects.filter(cidade=estacao.cidade)
+        for relatorio in relatorios:
+            soma_disponibilidade = soma_disponibilidade + relatorio.disponibilidade
+
         labels.append(estacao.cidade)
-        if relatorio:
-            data.append(relatorio.disponibilidade)  # Use 0 if disponibilidade is None
+
+        if relatorios:
+            disponibilidade_media = soma_disponibilidade / relatorios.count()
+            data.append(disponibilidade_media)  # Use 0 if disponibilidade is None
         else:
             data.append(100)
 

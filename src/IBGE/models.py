@@ -14,6 +14,7 @@ class Dados_IBGE(models.Model):
     cobertura_tvc = models.CharField(max_length=100, default="")
    
     class Meta:
+        ordering = ['cidade']
         db_table = "rede_dados_ibge"
         verbose_name = "Dados Cidades"  # Singular name
         verbose_name_plural = "Dados Cidades"  # Plural name

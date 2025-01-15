@@ -97,6 +97,7 @@ class Dados_Regulatorios(models.Model):
     comentarios = models.TextField()
 
     class Meta:
+        ordering = ['cidade']
         db_table = 'rede_dados_regulatorios'
         verbose_name = "Dados Regulatórios"  # Singular name
         verbose_name_plural = "Dados Regulatórios"  # Plural name

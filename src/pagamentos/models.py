@@ -73,10 +73,11 @@ class Dados_Pagamento(models.Model):
     comentarios = models.TextField(null=True, blank=True, help_text="Escreva outras observações da conta. Ex.: Número de contrato, consumo no mês etc")
    
     class Meta:
+        ordering = ['cidade']
         db_table = "rede_dados_pagamento"
         verbose_name = "Dados Pagamentos"  # Singular name
         verbose_name_plural = "Dados Pagamentos"  # Plural name
 
     def __str__(self):
         
-        return f"{self.cidade} - {self.get_tipo_conta_display()} - {self.get_mes_referencia_display()}"
+        return f"{self.cidade}"

@@ -22,23 +22,23 @@ class Relatorio_Manutencao(models.Model):
     id = models.AutoField(primary_key=True)
     #cidade = models.CharField(max_length=100)
 
-    def get_uf_choices():
-        from IBGE.models import Dados_IBGE
-         # Fetch choices dynamically from the Cidade model
-        unique_ufs = Dados_IBGE.objects.values_list('uf', flat=True).distinct()
-        return [(uf, uf) for uf in unique_ufs]
+    # def get_uf_choices():
+    #     from IBGE.models import Dados_IBGE
+    #      # Fetch choices dynamically from the Cidade model
+    #     unique_ufs = Dados_IBGE.objects.values_list('uf', flat=True).distinct()
+    #     return [(uf, uf) for uf in unique_ufs]
     
-    uf = models.CharField(
-        max_length=100,
-        choices=get_uf_choices,
-        blank=True,
-        null=True,
-    )
-    # UFs = [
-    #     ('item1', 'SP'),
-    #     ('item2', 'DF'),
-    # ]
-    # uf = models.CharField(max_length=10, choices=UFs, default='item1')
+    # uf = models.CharField(
+    #     max_length=100,
+    #     choices=get_uf_choices,
+    #     blank=True,
+    #     null=True,
+    # )
+    UFs = [
+        ('item1', 'SP'),
+        ('item2', 'DF'),
+    ]
+    uf = models.CharField(max_length=10, choices=UFs, default='item1')
 
     data_reclamacao = models.DateTimeField(null=True, blank=True)
     data_manutencao = models.DateTimeField(null=True, blank=True)
@@ -127,6 +127,7 @@ class Relatorio_Manutencao(models.Model):
     VISAO_GERAL = models.ImageField(upload_to='manutencao/', blank=True, null=True)
 
     class Meta:
+        ordering = ['cidade']
         db_table = 'rede_relatorio_manutencao'
         verbose_name = "Relatório Manutenção"  # Singular name
         verbose_name_plural = "Relatório Manutenção"  # Plural name
@@ -136,5 +137,3 @@ class Relatorio_Manutencao(models.Model):
         data_manutencao_local = timezone.localtime(self.data_manutencao) if self.data_manutencao else None
         return f"{self.cidade} - {data_manutencao_local}"
     
-    def my_annotation_function(queryset):
-        return queryset.annotate(city_count=Count('cidade'))

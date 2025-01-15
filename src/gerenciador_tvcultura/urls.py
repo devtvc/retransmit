@@ -33,7 +33,6 @@ urlpatterns = [
     path('sobre/', sobre_page, name='sobre'),
     path('images/', image_view, name='image_view'),
     path('pdfs/', pdf_view, name='pdf_view'),
-    path('admin_tools_stats/', include('admin_tools_stats.urls')),
     
 ]
 
