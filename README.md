@@ -12,7 +12,7 @@ Feito com Django 5.1.4 e Python 3.10.12.
   - Controle de manutenções.
     
 - Via frontend
-  - Visualização básica das informações das estações;
+  - Visualização básica das informações das estações; TESTE
   - Visualização da disponibilidade das estações.
  
 ### Melhorias futuras
