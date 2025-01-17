@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -29,34 +29,14 @@
         {% endif %}
     </div>
 
-    <script>
-
-        const labels = {{ labels|safe }};
-        const data = {{ data|safe }}; 
-        
-        const ctx = document.getElementById('disponibilidadeChart').getContext('2d');
-        const disponibilidadeChart = new Chart(ctx, {
-            type: 'bar', // Bar chart
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Disponibilidade (%)',
-                    data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100 // Set max to 100%
-                    }
-                }
-            }
-        });
+    <script id="labels-data" type="text/javascript">
+        {{ labels|safe }}
     </script>
+    <script id="data-data" type="text/javascript">
+        {{ data|safe }}
+    </script>
+
+
 </body>
 </html>
 {% endblock %}

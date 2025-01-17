@@ -24,7 +24,7 @@ def estacao_page(request):
         'valores': json.dumps(valores),})
     
     return render(request, 'estacoes.html', context)
-
+    
 def image_view(request):
     # Your logic to serve an image or list images here
     return HttpResponse("This is a custom image view.")
@@ -89,9 +89,10 @@ def disponibilidade_chart(request):
             data.append(100)
 
     context = {
-        'labels': labels,  # Ensure this is a list of strings
-        'data': data,      # Ensure this is a list of numbers
+        'labels': json.dumps(labels),  # Ensure labels are valid JSON
+        'data': json.dumps(data),      # Ensure data is valid JSON
         'page_obj': page_obj
     }
-    return render(request, 'estacao/chart.html', context)
+
+    return render(request, 'disponibilidade/chart.html', context)
     

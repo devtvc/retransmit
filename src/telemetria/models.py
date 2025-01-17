@@ -16,17 +16,24 @@ class Telemetria(models.Model):
         null=True,
     )
     
-    def get_uf_choices():
-         # Fetch choices dynamically from the Cidade model
-        unique_ufs = Dados_IBGE.objects.values_list('uf', flat=True).distinct()
-        return [(uf, uf) for uf in unique_ufs]
+    # def get_uf_choices():
+    #      # Fetch choices dynamically from the Cidade model
+    #     unique_ufs = Dados_IBGE.objects.values_list('uf', flat=True).distinct()
+    #     return [(uf, uf) for uf in unique_ufs]
     
-    uf = models.CharField(
-        max_length=100,
-        choices=get_uf_choices,
-        blank=True,
-        null=True,
-    )
+    # uf = models.CharField(
+    #     max_length=100,
+    #     choices=get_uf_choices,
+    #     blank=True,
+    #     null=True,
+    # )
+    
+    UFs = [
+        ('item1', 'SP'),
+        ('item2', 'DF'),
+    ]
+    uf = models.CharField(max_length=10, choices=UFs, default='item1')
+
     VERSAO_SW = [
          ('item1', 'TECSYS'),
          ('item2', 'ANYWAVE V1'),

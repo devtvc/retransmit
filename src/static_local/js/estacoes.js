@@ -18,6 +18,7 @@ function renderiza_total_estacoes(estacoes, valores){
     
 }
 
+
 window.onload = function () { 
     const estacoesElement = document.getElementById('estacoes-data');
     const valoresElement = document.getElementById('valores-data');
@@ -29,4 +30,7 @@ window.onload = function () {
 
             renderiza_total_estacoes(estacoes,valores);
     }
+
 };
+
+
