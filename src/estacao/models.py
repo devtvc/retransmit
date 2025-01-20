@@ -105,10 +105,6 @@ class Estacao(models.Model):
     anexo_contrato_estacao = models.FileField(upload_to='pdfs/', blank=True, null=True, help_text="Anexo do contrato em PDF")
     comentarios = models.TextField(blank=True, help_text="Insira outras informações relevantes sobre a estação")
 
-    
-
-    
-    
     #proprietario_terreno = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
     #proprietario_torre = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
     #pgto_energia = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')

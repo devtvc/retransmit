@@ -9,9 +9,5 @@ class EstacaoAdmin(admin.ModelAdmin):
     list_filter = ('uf', 'responsabilidade_operacao', 'status_operacao', 'sfn', 'modelo_tx', 'tipo_torre', 'status_telemetria', 'proprietario_terreno', 'energia_paga_por', 'agua_paga_por', 'aluguel_pago_por', 'iptu_pago_por')  # Fields for filtering
     search_fields = ('cidade', 'responsabilidade_operacao')  # Fields to include in the search
 
-    # def disponibilidade_display(self, obj):
-    #     return obj.disponibilidade_30_dias
-    # disponibilidade_display.short_description = "Disponibilidade"
-
 admin.site.register(Estacao, EstacaoAdmin)
 
