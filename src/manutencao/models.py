@@ -75,22 +75,25 @@ class Relatorio_Manutencao(models.Model):
                 })
        
     
-    disponibilidade = models.FloatField(null=True, blank=True, editable=False)
+    # disponibilidade = models.FloatField(null=True, blank=True, editable=False)
 
-    # @property
-    # def disponibilidade(self):
+    difference = models.FloatField(null=True, blank=True, editable=False)
+
+    # def save(self, *args, **kwargs):
     #     if self.data_reclamacao and self.data_manutencao:
     #         difference = (self.data_manutencao - self.data_reclamacao).days
-    #         return 100 - ((difference / 30) * 100)
-    #     return None
-    
+    #         self.disponibilidade = round(100 - ((difference / 30) * 100), 2)
+    #     else:
+    #         # Set disponibilidade to 100 if either date is missing
+    #         self.disponibilidade = 100.0
+    #     super().save(*args, **kwargs)
+
     def save(self, *args, **kwargs):
         if self.data_reclamacao and self.data_manutencao:
-            difference = (self.data_manutencao - self.data_reclamacao).days
-            self.disponibilidade = round(100 - ((difference / 30) * 100), 2)
+            self.difference = (self.data_manutencao - self.data_reclamacao).days
         else:
-            # Set disponibilidade to 100 if either date is missing
-            self.disponibilidade = 100.0
+            # Set diferenca para 0 se não há dados
+            self.difference = 0
         super().save(*args, **kwargs)
 
     TECNICO_MANUT = [

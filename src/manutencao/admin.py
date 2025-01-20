@@ -2,13 +2,13 @@ from django.contrib import admin
 from .models import Relatorio_Manutencao
 
 class Relatorio_ManutencaoAdmin(admin.ModelAdmin):
-    list_display = ('cidade', 'data_reclamacao', 'data_manutencao','tecnico_manutencao', 'disponibilidade_display')
+    list_display = ('cidade', 'data_reclamacao', 'data_manutencao','tecnico_manutencao','dias_fora_do_ar')
     list_filter = ('data_reclamacao','data_manutencao', 'tecnico_manutencao','tipo_manutencao')
     search_fields = ('cidade', 'data_reclamacao', 'data_manutencao', 'tecnico_manutencao')
 
-    def disponibilidade_display(self, obj):
-        return obj.disponibilidade
-    disponibilidade_display.short_description = "Disponibilidade Últimos 30 Dias"
+    def dias_fora_do_ar(self, obj):
+        return obj.difference
+    dias_fora_do_ar.short_description = "Dias fora do ar"
 
     
 

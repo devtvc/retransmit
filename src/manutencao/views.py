@@ -29,7 +29,6 @@ def manutencao_detail(request,id):
         'exciter_power': manutencao.exciter_power,
         'nivel_CN': manutencao.nivel_CN,
         'nivel_recepcao': manutencao.nivel_recepcao,
-        'disponibilidade': manutencao.disponibilidade,
         # 'VISAO_GERAL': manutencao.VISAO_GERAL.url,
     }
     return JsonResponse(data)

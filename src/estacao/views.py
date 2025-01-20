@@ -46,8 +46,7 @@ class EstacaoListView(ListView):
     
 def estacao_detail(request,id):
     estacao = Estacao.objects.get(id=id)
-    manutencao = Relatorio_Manutencao.objects.filter(cidade=estacao.cidade).first()
-    disponibilidade = manutencao.disponibilidade if manutencao else 100
+   
     data = {
         'cidade': estacao.cidade,
         'uf': estacao.uf,
@@ -57,7 +56,6 @@ def estacao_detail(request,id):
         'responsabilidade_operacao': estacao.responsabilidade_operacao,
         'status_operacao': estacao.status_operacao,
         'status_telemetria': estacao.status_telemetria,
-        'disponibilidade': disponibilidade,
 
         # 'VISAO_GERAL': estacao.VISAO_GERAL.url,
     }
@@ -73,17 +71,34 @@ def disponibilidade_chart(request):
 
     labels = []
     data = []
-    soma_disponibilidade = 0.0
+
+    # soma_disponibilidade = 0.0
+
+    # for estacao in page_obj.object_list:
+    #     relatorios = Relatorio_Manutencao.objects.filter(cidade=estacao.cidade)
+    #     for relatorio in relatorios:
+    #         soma_disponibilidade = soma_disponibilidade + relatorio.disponibilidade
+
+    #     labels.append(estacao.cidade)
+
+    #     if relatorios:
+    #         disponibilidade_media = soma_disponibilidade / relatorios.count()
+    #         data.append(disponibilidade_media)  # Use 0 if disponibilidade is None
+    #     else:
+    #         data.append(100)
+
+    soma_diferenca = 0.0
+    disponibilidade_media = 0.0
 
     for estacao in page_obj.object_list:
         relatorios = Relatorio_Manutencao.objects.filter(cidade=estacao.cidade)
         for relatorio in relatorios:
-            soma_disponibilidade = soma_disponibilidade + relatorio.disponibilidade
+            soma_diferenca = soma_diferenca + relatorio.difference
+            disponibilidade_media = round(100 - ((soma_diferenca / 30) * 100), 2)
 
         labels.append(estacao.cidade)
 
         if relatorios:
-            disponibilidade_media = soma_disponibilidade / relatorios.count()
             data.append(disponibilidade_media)  # Use 0 if disponibilidade is None
         else:
             data.append(100)
