@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from .views import home_page, sobre_page
 from estacao.views import image_view, pdf_view, estacao_page, estacao_detail, EstacaoListView, disponibilidade_chart
 from manutencao.views import ManutencaoListView, manutencao_detail
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +33,7 @@ urlpatterns = [
     path('manutencao/<int:id>/', manutencao_detail, name='manutencao_detail'),
     path('sobre/', sobre_page, name='sobre'),
     path('images/', image_view, name='image_view'),
+    path('manutencao/', image_view, name='image_view'),
     path('pdfs/', pdf_view, name='pdf_view'),
     
 ]

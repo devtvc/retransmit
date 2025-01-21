@@ -17,10 +17,11 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Setup environment variables
-env = environ.Env(DEBUG=(bool, False),)
+env = environ.Env(DEBUG=(bool, True),)
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
@@ -30,14 +31,16 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-*fo%6xyz9lar_odq8*c8_+yod1n!c3tcsx-y!)nmynlh%1%67e')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = env.bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://retransmit.tvcultura.com.br']
 
+ALLOWED_HOSTS = ['retransmit.tvcultura.com.br', '127.0.0.1', 'localhost']
 
 # Application definition
 
 INSTALLED_APPS = [
+    "django_unused_media",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -61,7 +64,6 @@ INSTALLED_APPS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,12 +149,17 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static_local")
 ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+
 
 MEDIA_URL = '/media/'
-#MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 
-MEDIA_ROOT = os.path.join("static_cdn", "media_root")
+#STATIC_URL = '/var/www/retransmit/static/'
+STATIC_ROOT = '/var/www/retransmit/static'
+
+#MEDIA_URL = '/var/www/retransmit/media/'
+MEDIA_ROOT = '/var/www/retransmit/media'
 
 
 # Maximum size of uploaded files (in bytes)
