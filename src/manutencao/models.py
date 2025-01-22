@@ -115,7 +115,7 @@ class Relatorio_Manutencao(models.Model):
     tipo_manutencao = models.CharField(max_length=10, choices=TIPO_MANUT, default='item1')
     comentario_manutencao = models.TextField(blank=True)
     pot_direta = models.FloatField(null=True, blank=True, help_text="Leitura da potência direta em W")
-    pot_refletida = models.FloatField(null=True, blank=True, help_text="Leitura da potência direta em W")
+    pot_refletida = models.CharField(max_length=10, blank=True, help_text="Leitura da potência direta em W")
     exciter_power = models.FloatField(null=True, blank=True, help_text="Leitura do nível de excitação em dBm")
     nivel_CN = models.FloatField(null=True, blank=True, help_text="Leitura de C/N em dB")
     nivel_recepcao = models.FloatField(null=True, blank=True, help_text="Leitura do nível de recepção em dBm")

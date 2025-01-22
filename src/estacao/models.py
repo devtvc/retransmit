@@ -43,14 +43,13 @@ class Estacao(models.Model):
     potencia_projeto = models.CharField(max_length=30, help_text="Potência de projeto em W")
     potencia_operacao = models.CharField(max_length=30, help_text="Potência de operação em W")
 
-    sfn = models.CharField(
-        max_length=100,
-        choices=get_cidade_choices,
-        blank=True,
-        null=True,
-        help_text="Selecione a cidade que faz SFN com essa estação",
-    )
-    #sfn = models.CharField(max_length=10, blank=True)
+    _S_N = [
+       ('item1', 'SIM'),
+       ('item2', 'NÃO'),
+    ]
+
+    sfn = models.CharField(max_length=10, choices=_S_N, blank=True)
+    sfn_com = models.CharField(max_length=200, blank=True, help_text="Digite todas as cidades que fazem SFN com essa estação, separadas por vírgula")
     sfn_id = models.CharField(max_length=10, blank=True, help_text="Deixe em branco se a estação não faz SFN")
 
     equipe = models.CharField(max_length=10, help_text="Equipe de manutenção responsável")
@@ -64,22 +63,53 @@ class Estacao(models.Model):
     # ]
     # responsabilidade_operacao = models.CharField(max_length=10, choices=OPERADORA, default="")
 
+    MARCAS_TX_RX = [
+       ('item1', 'TECSYS'),
+       ('item2', 'ANYWAVE'),
+       ('item3', 'HITACHI'),
+       ('item4', 'SCREEN'),
+       ('item5', 'LINEAR (CONVERTIDO)'),
+    ]
+
+    MARCAS_ANT_TX = [
+       ('item1', 'IDEAL'),
+       ('item2', 'DIGITAL'),
+       ('item3', 'POLIDESIGN'),
+       ('item4', 'IF TELECOM'),
+       ('item5', 'LUMICOM'),
+       ('item6', 'ORIGINAL TELECOM'),
+       ('item7', 'PAINEL'),
+       ('item8', 'POLITELCO'),
+       ('item9', 'TRANSTEL'),
+    ]
+
+    TIPOS_TORRE = [
+       ('item1', 'AUTOSUPORTADA'),
+       ('item2', 'ESTAIADA'),
+       ('item3', 'ALVENARIA'),
+       ('item4', 'AP'),
+       ('item5', 'CAIXA D AGUA'),
+       ('item6', 'PRÉDIO'),
+       ('item7', 'TUBULÃO DE FERRO'),
+       ('item8', 'TUBULÃO GALVANIZADO'),
+    ]
+
     status_operacao = models.CharField(max_length=100, help_text="OPERACIONAL ou SEM OPERAÇÃO")
-    fabricante_tx = models.CharField(max_length=100, help_text="Tecsys, Anywave, Hitachi etc")
+    fabricante_tx = models.CharField(max_length=100, choices=MARCAS_TX_RX, blank=True)
     modelo_tx = models.CharField(max_length=100)
-    fabricante_antena_tx = models.CharField(max_length=100)
+    fabricante_antena_tx = models.CharField(max_length=100, choices=MARCAS_ANT_TX)
     modelo_antena_tx = models.CharField(max_length=100)
     fabricante_rx = models.CharField(max_length=100, help_text="Tecsys, Anywave, Hitachi etc")
     modelo_rx = models.CharField(max_length=100)
     fabricante_antena_rx = models.CharField(max_length=100)
     diametro_antena_rx = models.CharField(max_length=100, help_text="Diâmetro da antena de recepção de satélite em metros")
-    tipo_torre = models.CharField(max_length=100, help_text="Estaiada, autosuportada etc")
+    tipo_torre = models.CharField(max_length=100, choices=TIPOS_TORRE)
     altura_torre = models.CharField(max_length=100, help_text="Altura da torre em metros")
     proprietario_torre = models.CharField(max_length=100, help_text="CNPJ ou razão social")
     fabricante_ar_condicionado = models.CharField(max_length=100, blank=True, help_text="Consul, Eletrolux etc")
     modelo_ar_condicionado = models.CharField(max_length=100)
 
-    status_telemetria = models.CharField(max_length=100, help_text="Instalado ou Não instalado")
+    status_telemetria = models.CharField(max_length=100, choices=_S_N, help_text="Sim = Instalado, Não = não instalado")
     proprietario_terreno = models.CharField(max_length=100)
 
     # RESPONSABILIDADE = [
@@ -89,16 +119,16 @@ class Estacao(models.Model):
     # ]
 
     #energia_paga_por = models.CharField(max_length=100, choices=RESPONSABILIDADE)
-    energia_paga_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA")
+    energia_paga_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA etc")
 
     #agua_paga_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
-    agua_paga_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA")
+    agua_paga_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA etc")
 
     #aluguel_pago_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
-    aluguel_pago_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA")
+    aluguel_pago_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA etc")
 
     #iptu_pago_por = models.CharField(max_length=10, choices=RESPONSABILIDADE, default='item1')
-    iptu_pago_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA")
+    iptu_pago_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA etc")
 
     tipo_abrigo = models.CharField(max_length=100, help_text="Alvenaria, container etc")
     endereco = models.CharField(max_length=500)
