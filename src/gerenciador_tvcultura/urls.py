@@ -32,8 +32,10 @@ urlpatterns = [
     path('manutencao/', ManutencaoListView.as_view(), name='manutencao'),
     path('manutencao/<int:id>/', manutencao_detail, name='manutencao_detail'),
     path('sobre/', sobre_page, name='sobre'),
-    path('images/', image_view, name='image_view'),
     path('manutencao/', image_view, name='image_view'),
+    path('contas_digitalizadas/', image_view, name='image_view'),
+    path('fotos_ativos/', image_view, name='image_view'),
+    path('imagens_projeto/', image_view, name='image_view'),
     path('pdfs/', pdf_view, name='pdf_view'),
     
 ]

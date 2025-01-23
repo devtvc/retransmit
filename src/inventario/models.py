@@ -38,8 +38,8 @@ class Inventario(models.Model):
     descricao = models.CharField(max_length=100, help_text="AR CONDICIONADO, TRANSMISSOR UHF, RECEPTOR, ANTENA RX, ANTENA TX")
     serial_number = models.CharField(max_length=100)
     ativo_fixo = models.CharField(max_length=100)
-    foto_ativo_frontal = models.ImageField(upload_to='images/', blank=True, null=True, help_text="Carregue uma foto da parte de frente do ativo")
-    foto_ativo_traseira = models.ImageField(upload_to='images/', blank=True, null=True, help_text="Carregue uma foto da parte traseira do ativo")
+    foto_ativo_frontal = models.ImageField(upload_to='fotos_ativos/', blank=True, null=True, help_text="Carregue uma foto da parte de frente do ativo")
+    foto_ativo_traseira = models.ImageField(upload_to='fotos_ativos/', blank=True, null=True, help_text="Carregue uma foto da parte traseira do ativo")
     comentarios = models.TextField(help_text="Insira informações relevantes sobre esse ativo")
 
     class Meta:

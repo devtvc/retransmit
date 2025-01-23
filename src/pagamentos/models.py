@@ -75,10 +75,11 @@ class Dados_Pagamento(models.Model):
     razao_social_receptor = models.CharField(max_length=100, default="", help_text="Digite a razão social do CPF/CNPJ informado acima")
     valor_bruto_conta = models.FloatField(null=True, blank=True, help_text="Digite o valor bruto da conta em R$")
     valor_liquido_conta = models.FloatField(null=True, blank=True, help_text="Digite o valor líquido da conta em R$")
+    conta_digitalizada = models.ImageField(upload_to='contas_digitalizadas/', blank=True, null=True)
     comentarios = models.TextField(null=True, blank=True, help_text="Escreva outras observações da conta. Ex.: Número de contrato, consumo no mês etc")
    
     class Meta:
-        ordering = ['cidade']
+        ordering = ['-mes_referencia']
         db_table = "rede_dados_pagamento"
         verbose_name = "Dados Pagamentos"  # Singular name
         verbose_name_plural = "Dados Pagamentos"  # Plural name

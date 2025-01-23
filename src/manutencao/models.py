@@ -130,7 +130,7 @@ class Relatorio_Manutencao(models.Model):
     VISAO_GERAL = models.ImageField(upload_to='manutencao/', blank=True, null=True)
 
     class Meta:
-        ordering = ['cidade']
+        ordering = ['-data_manutencao']
         db_table = 'rede_relatorio_manutencao'
         verbose_name = "Relatório Manutenção"  # Singular name
         verbose_name_plural = "Relatório Manutenção"  # Plural name

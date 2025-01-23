@@ -111,6 +111,7 @@ class Estacao(models.Model):
 
     status_telemetria = models.CharField(max_length=100, choices=_S_N, help_text="Sim = Instalado, Não = não instalado")
     proprietario_terreno = models.CharField(max_length=100)
+    seguro_estacao = models.CharField(max_length=100, choices=_S_N)
 
     # RESPONSABILIDADE = [
     #     ('item1', 'FPA'),
