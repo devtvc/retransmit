@@ -38,9 +38,18 @@ class Estacao(models.Model):
     ]
     uf = models.CharField(max_length=10, choices=UFs, default='item1')
 
+    OUTORGAS = [
+        ('item1', 'FPA'),
+        ('item2', 'PM'),
+        ('item3', 'REVOGADA'),
+        ('item3', 'OUTROS'),
+    ]
+
+    outorga_estacao = models.CharField(max_length=30, choices=OUTORGAS, default="item1", blank=True)
+
     #uf = models.CharField(max_length=10)
     canal_virtual = models.CharField(max_length=30)
-    potencia_projeto = models.CharField(max_length=30, help_text="Potência de projeto em W")
+    potencia_projeto = models.CharField(max_length=30, help_text="Potência de projeto em W", verbose_name="Potência de Projeto/Licença")
     potencia_operacao = models.CharField(max_length=30, help_text="Potência de operação em W")
 
     _S_N = [
@@ -97,8 +106,12 @@ class Estacao(models.Model):
     status_operacao = models.CharField(max_length=100, help_text="OPERACIONAL ou SEM OPERAÇÃO")
     fabricante_tx = models.CharField(max_length=100, choices=MARCAS_TX_RX, blank=True)
     modelo_tx = models.CharField(max_length=100)
+    codigo_homolog_tx = models.CharField(max_length=100, blank=True, null=True, verbose_name="Código de homologação do transmissor")
     fabricante_antena_tx = models.CharField(max_length=100, choices=MARCAS_ANT_TX)
     modelo_antena_tx = models.CharField(max_length=100)
+    azimute = models.CharField(max_length=100, blank=True, null=True, verbose_name="Azimute/Orientação", help_text="Azimute/Direção de orientação da Antena e relação ao norte verdadeiro")
+    fabricante_linha_tx = models.CharField(max_length=100, blank=True, null=True, verbose_name="Fabricante da linha de transmissão", help_text="Linha/cabo de Transmissão - Fabricante")
+    comp_linha_tx = models.CharField(max_length=100, blank=True, null=True, verbose_name="Comprimento da linha de transmissão", help_text="Linha/cabo de Transmissão - Comprimento")
     fabricante_rx = models.CharField(max_length=100, help_text="Tecsys, Anywave, Hitachi etc")
     modelo_rx = models.CharField(max_length=100)
     fabricante_antena_rx = models.CharField(max_length=100)
@@ -113,11 +126,6 @@ class Estacao(models.Model):
     proprietario_terreno = models.CharField(max_length=100)
     seguro_estacao = models.CharField(max_length=100, choices=_S_N)
 
-    # RESPONSABILIDADE = [
-    #     ('item1', 'FPA'),
-    #     ('item2', 'PM'),
-    #     ('item3', 'PMSP'),
-    # ]
 
     #energia_paga_por = models.CharField(max_length=100, choices=RESPONSABILIDADE)
     energia_paga_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA etc")
@@ -132,7 +140,12 @@ class Estacao(models.Model):
     iptu_pago_por = models.CharField(max_length=100, help_text="PM / PMSP / FPA etc")
 
     tipo_abrigo = models.CharField(max_length=100, help_text="Alvenaria, container etc")
+
+    latitude = models.CharField(max_length=100, blank=True, null=True)
+    longitude = models.CharField(max_length=100, blank=True, null=True)
     endereco = models.CharField(max_length=500)
+    cep = models.CharField(max_length=100, blank=True, null=True, help_text="CEP do endereço da estação")
+
     anexo_contrato_estacao = models.FileField(upload_to='pdfs/', blank=True, null=True, help_text="Anexo do contrato em PDF")
     comentarios = models.TextField(blank=True, help_text="Insira outras informações relevantes sobre a estação")
 

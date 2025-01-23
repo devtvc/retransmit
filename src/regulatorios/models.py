@@ -32,6 +32,7 @@ class Dados_Regulatorios(models.Model):
     #]
     #uf = models.CharField(max_length=10, choices=UFS, default='item1')
     uf = models.CharField(max_length=10)
+    local_especifico = models.CharField(max_length=100, blank=True, null=True)
 
     canal_fisico = models.CharField(max_length=100)
     #STATUS = [
@@ -68,7 +69,7 @@ class Dados_Regulatorios(models.Model):
     #    ('item4', 'FM'),
     #]
     #servico = models.CharField(max_length=10, choices=SERVICOS, default='item1')
-    servico = models.CharField(max_length=100, help_text="RTVD, GTVD, AM, FM")
+    servico = models.CharField(max_length=100, help_text="RTVD, GTVD, ECRD, AM, FM")
     frequencia = models.CharField(max_length=100, help_text="Frequência do canal em MHz")
     #CLASSES = [
     #    ('item1', 'A'),

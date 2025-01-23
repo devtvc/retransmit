@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     "manutencao",
     "regulatorios",
     "pagamentos",
-    "telemetria"
+    "telemetria",
+    "processos_anatel"
 ]
 
 # Default primary key field type
