@@ -14,28 +14,27 @@ class Inventario(models.Model):
         choices=get_cidade_choices,
         blank=True,
         null=True,
+        verbose_name="Cidade/Estação"
     )
     #cidade = models.CharField(max_length=100)
-    #EQUIPES = [
-    #    ('item1', 'SP-1'),
-    #    ('item2', 'SP-2'),
-    #    ('item2', 'SP-3'),
-    #    ('item2', 'SP-4'),
-    #]
-    equipe = models.CharField(max_length=100)
-    # def get_equipe_choices():
-    #    # Fetch unique cidade values dynamically from the Estacao model
-    #    unique_equipes = Estacao.objects.values_list('equipe', flat=True).distinct()
-    #    return [(equipe, equipe) for equipe in unique_equipes]
+    EQUIPES = [
+       ('item1', 'SP-1'),
+       ('item2', 'SP-2'),
+       ('item3', 'SP-3'),
+       ('item4', 'SP-4'),
+    ]
+    equipe = models.CharField(max_length=500, choices=EQUIPES, verbose_name="Equipe")
+
+    EQUIPAMENTOS = [
+       ('item1', 'AR CONDICIONADO'),
+       ('item2', 'TRANSMISSOR UHF'),
+       ('item3', 'RECEPTOR SAT'),
+       ('item4', 'ANTENA RX'),
+       ('item5', 'ANTENA TX'),
+       ('item6', 'OUTROS - DETALHAR EM COMENTÁRIOS'),
+    ]
     
-    # equipe = models.CharField(
-    #    max_length=100,
-    #    choices=get_equipe_choices(),
-    #    blank=True,
-    #    null=True,
-    # )
-   
-    descricao = models.CharField(max_length=100, help_text="AR CONDICIONADO, TRANSMISSOR UHF, RECEPTOR, ANTENA RX, ANTENA TX")
+    descricao = models.CharField(max_length=100, choices=EQUIPAMENTOS, verbose_name="Descrição do ativo")
     serial_number = models.CharField(max_length=100)
     ativo_fixo = models.CharField(max_length=100)
     foto_ativo_frontal = models.ImageField(upload_to='fotos_ativos/', blank=True, null=True, help_text="Carregue uma foto da parte de frente do ativo")
@@ -50,4 +49,4 @@ class Inventario(models.Model):
 
 
     def __str__(self):
-        return self.descricao
+        return self.get_descricao_display()

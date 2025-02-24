@@ -5,6 +5,8 @@ import json
 from django.views.generic import ListView
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+from datetime import datetime
+from calendar import calendar
 
 # Create your views here.
 def estacao_page(request):
@@ -89,12 +91,14 @@ def disponibilidade_chart(request):
 
     soma_diferenca = 0.0
     disponibilidade_media = 0.0
+    atual = datetime.datetime.now()
+    total_dias = calendar.monthrange(atual.year, atual.month)[1]
 
     for estacao in page_obj.object_list:
         relatorios = Relatorio_Manutencao.objects.filter(cidade=estacao.cidade)
         for relatorio in relatorios:
             soma_diferenca = soma_diferenca + relatorio.difference
-            disponibilidade_media = round(100 - ((soma_diferenca / 30) * 100), 2)
+            disponibilidade_media = round(100 - ((soma_diferenca / total_dias) * 100), 2)
 
         labels.append(estacao.cidade)
 

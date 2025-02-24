@@ -97,12 +97,10 @@ class Relatorio_Manutencao(models.Model):
         super().save(*args, **kwargs)
 
     TECNICO_MANUT = [
-        ('item1', 'ARI LIMA'),
-        ('item2', 'RODRIGO AGUADO'),
-        ('item3', 'PEDRO'),
-        ('item4', 'TANIS'),
-        ('item5', 'ALEXANDRE COSME'),
-        ('item6', 'ELIAS'),
+        ('item1', 'ARI/RODRIGO AGUADO - SP1'),
+        ('item2', 'PEDRO/TANIS - SP2'),
+        ('item3', 'ELIAS - SP3'),
+        ('item4', 'ALEXANDRE COSME/ANDRÉ - SP4'),
     ]
 
     tecnico_manutencao = models.CharField(max_length=50, choices=TECNICO_MANUT, default='item1')
